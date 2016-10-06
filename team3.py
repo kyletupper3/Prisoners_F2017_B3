@@ -1,4 +1,5 @@
 ####
+
 # Each team's file must define four tokens:
 #     team_name: a string
 #     strategy_name: a string
@@ -6,9 +7,10 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'The name the team gives to itself' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+#Team 3: Kris and Kyle
+team_name = 'Reaper' # Only 10 chars displayed.
+strategy_name = 'Hungry Grim Trigger'
+strategy_description = 'Colludes until betrayed. If betrayed, betrays until game is over. If ahead in score after 10 turns, betrays.'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -25,10 +27,44 @@ def move(my_history, their_history, my_score, their_score):
     
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
-    
-    return 'c'
-
-    
+    '''if len(my_history)==0:
+        return 'ccbbcc'
+    if their_history[:6]=='cccbbb':
+        strat='c-til-b'
+    elif their_history[:6]=='cccbbc':
+        strat='t4t'
+    elif their_history[:6]=='bbbbbb':
+        strat='all-b'
+    elif their_history[:6]=='cccccc':
+        strat='all-c'
+    elif their_history[:6]=='cbcbcb':
+        strat='alt1'
+    elif their_history[:6]=='bcbcbc':
+        strat='alt2'
+    elif their_history[:6]=='cccbcc':
+        strat='ret'
+    elif their_history[:6]=='bccbbc':
+        strat='st4t'
+    elif their_history[:6]=='ccccbc':
+        strat='t42t'
+    else:
+        strat='null'
+        
+    if strat=='t42t' or strat=='t4t' or strat=='st4t' or strat=='ret':
+        return 'c'
+    elif strat=='c-til-b' or strat=='alt1' or strat=='alt2' or strat=='all-c' or strat=='all-b':
+        return 'b'
+    else:'''
+  #Strategy here  
+    if len(my_history)==0:
+        return 'c'
+    elif their_score<my_score and len(my_history)>9:
+        return 'b'
+    elif 'b' in their_history:
+        return 'b'
+    else:
+        return 'c'
+ 
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
     from this module. Prints error if return value != result.
