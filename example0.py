@@ -6,6 +6,9 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
+#Adding a comment to test a pull request.
+#Note: this is an example file. Team 0 will need to edit 'team0.py' instead.
+
 team_name = 'E0'
 strategy_name = 'Collude'
 strategy_description = 'Always collude.'
